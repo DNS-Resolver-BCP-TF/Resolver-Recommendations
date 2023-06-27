@@ -16,3 +16,9 @@
   - Statistics
 * Finances
   - How to pay for all of this?
+* Communication channels
+  - Web page
+  - E-mail (DANE protected)
+  - Security reporting channels
+  - Regular reports
+  - Snarky Mastodon intern completely optional
