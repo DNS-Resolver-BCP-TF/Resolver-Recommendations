@@ -31,6 +31,9 @@ Question: Is it important to consider how to measure adherence to these recommen
   - Open Source advantages (and disadvantages), licenses
   - Custom tweaks/implementations
   - Platforms (it's all Unix these days)
+
+[Knobs to tweak in the DNS](DNS-options.md)
+
 * Knobs to tweak in the DNS
   - TTL limits (max & min)
   - Local root (and maybe local TLD?)
@@ -58,6 +61,9 @@ Question: Is it important to consider how to measure adherence to these recommen
   - Trust anchor reporting
   - DNS error reporting
     - [draft-ietf-dnsop-dns-error-reporting](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-error-reporting)
+
+[Privacy, Filtering, Transparency](privacy-filtering.md)
+
 * Privacy & anonymity
   - Logging considerations
   - How to handle user accounts
@@ -78,3 +84,5 @@ Question: Is it important to consider how to measure adherence to these recommen
   - Security reporting channels
   - Regular reports
   - Snarky Mastodon intern completely optional
+
+[Other Documents of Interest](documents.md)
