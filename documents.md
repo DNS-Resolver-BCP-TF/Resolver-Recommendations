@@ -5,34 +5,37 @@
 
 ### KINDNS
 
-https://kindns.org/guidelines/
+[KINDDNS Guidelines](https://kindns.org/guidelines/)
 
 Lots of separate documents, we probably care most about:
-https://kindns.org/guidelines/public-resolver-operators/
+
+[Public Resolver Operators](https://kindns.org/guidelines/public-resolver-operators/)
 
 But also:
 
-https://kindns.org/guidelines/private-resolver-operators/
-https://kindns.org/guidelines/shared-private-resolver-operators/
-https://kindns.org/guidelines/core-platform-system-hardening/
+[Private Resolver Operators](https://kindns.org/guidelines/private-resolver-operators/)
+
+[Shared Private Resolver Operators](https://kindns.org/guidelines/shared-private-resolver-operators/)
+
+[Core Platform System Hardening](https://kindns.org/guidelines/core-platform-system-hardening/)
 
 ### European DNS Resolver Policy
 
-https://europeanresolverpolicy.com/
+[Resolver Policy](ttps://europeanresolverpolicy.com/)
 
 ### Recommendations for DNSSEC Resolvers Operators
 
-https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-dnssec-validator-requirements
+[draft-ietf-dnsop-dnssec-validator-requirements](https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-dnssec-validator-requirements)
 
-### FIRST DNS Abuse Techniquest Matrix:
+### FIRST DNS
 
-https://www.first.org/global/sigs/dns/
+[DNS](https://www.first.org/global/sigs/dns/)_
 
-https://www.first.org/global/sigs/dns/DNS-Abuse-Techniques-Matrix_v1.1.pdf
+[ Abuse Techniquest Matrix](https://www.first.org/global/sigs/dns/DNS-Abuse-Techniques-Matrix_v1.1.pdf)
 
 (Unfortunately their DANE authentication fails on the site!)
 
 ### Concerns of DNS blocking
 
-https://medium.com/@vgcerf/concerns-over-dns-blocking-988ef546a100
+[Vint Cerf on DNS Blocking](https://medium.com/@vgcerf/concerns-over-dns-blocking-988ef546a100)
 
