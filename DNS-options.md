@@ -27,6 +27,7 @@
   - DoQ
     - [RFC9250](https://www.rfc-editor.org/rfc/rfc9250.html)
   - Trust anchor reporting
+    - [RFC8145](https://www.rfc-editor.org/rfc/rfc8145.html)
   - DNS error reporting
     - [draft-ietf-dnsop-dns-error-reporting](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-error-reporting)
 
