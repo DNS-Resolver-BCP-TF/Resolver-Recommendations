@@ -10,6 +10,8 @@ Question: Is it important to consider how to measure adherence to these recommen
 
 ## Random, unsorted list of things to consider
 
+[Systems Network Capacity](systems-networks.md)
+
 * Capacity
   - CPU/network
   - Multi-layer caching
