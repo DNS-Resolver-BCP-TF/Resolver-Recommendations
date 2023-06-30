@@ -1,5 +1,6 @@
 # DNS Resolver Recommendations
 
+[About the DNS Resolver Best Common Practice Task Force](https://www.ripe.net/participate/ripe/tf/dns-resolver-best-common-practice-task-force)
 
 Document should consist of a set of considerations & recommendations.
 Question: Is it important to consider how to measure adherence to these recommendations?
