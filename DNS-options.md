@@ -34,4 +34,5 @@
     - [RFC8145](https://www.rfc-editor.org/rfc/rfc8145.html)
   - DNS error reporting
     - [draft-ietf-dnsop-dns-error-reporting](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-error-reporting)
-
+  - Extended DNS Errors
+    - [RFC8914](https://www.rfc-editor.org/rfc/rfc8914.html)
