@@ -17,6 +17,8 @@ The document serves as guidance for the wider Internet community, offering input
 
 [Systems Network Capacity](systems-networks.md)
 
+{{systems-networks.md}}
+
 <!--
 * Capacity
   - CPU/network
@@ -40,6 +42,8 @@ The document serves as guidance for the wider Internet community, offering input
  -->
 
 [Knobs to tweak in the DNS](DNS-options.md)
+
+{{DNS-options.md}}
 
 <!-- * Knobs to tweak in the DNS
   - TTL limits (max & min)
@@ -71,6 +75,8 @@ The document serves as guidance for the wider Internet community, offering input
 
 [Privacy, Filtering, Transparency](privacy-filtering.md)
 
+{{privacy-filtering.md}}
+
 <!-- * Privacy & anonymity
   - Logging considerations
   - How to handle user accounts
@@ -93,3 +99,5 @@ The document serves as guidance for the wider Internet community, offering input
   - Snarky Mastodon intern completely optional -->
 
 [Other Documents of Interest](documents.md)
+
+{{documents.md}}
