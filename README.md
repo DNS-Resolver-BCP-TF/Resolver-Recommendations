@@ -17,6 +17,7 @@ The document serves as guidance for the wider Internet community, offering input
 
 [Systems Network Capacity](systems-networks.md)
 
+<!--
 * Capacity
   - CPU/network
   - Multi-layer caching
@@ -36,10 +37,11 @@ The document serves as guidance for the wider Internet community, offering input
   - Open Source advantages (and disadvantages), licenses
   - Custom tweaks/implementations
   - Platforms (it's all Unix these days)
+ -->
 
 [Knobs to tweak in the DNS](DNS-options.md)
 
-* Knobs to tweak in the DNS
+<!-- * Knobs to tweak in the DNS
   - TTL limits (max & min)
   - Local root (and maybe local TLD?)
     - [RFC8806](https://www.rfc-editor.org/rfc/rfc8806.html)
@@ -65,11 +67,11 @@ The document serves as guidance for the wider Internet community, offering input
     - [RFC9250](https://www.rfc-editor.org/rfc/rfc9250.html)
   - Trust anchor reporting
   - DNS error reporting
-    - [draft-ietf-dnsop-dns-error-reporting](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-error-reporting)
+    - [draft-ietf-dnsop-dns-error-reporting](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-error-reporting) -->
 
 [Privacy, Filtering, Transparency](privacy-filtering.md)
 
-* Privacy & anonymity
+<!-- * Privacy & anonymity
   - Logging considerations
   - How to handle user accounts
 * Filtering
@@ -88,6 +90,6 @@ The document serves as guidance for the wider Internet community, offering input
   - E-mail (DANE protected)
   - Security reporting channels
   - Regular reports
-  - Snarky Mastodon intern completely optional
+  - Snarky Mastodon intern completely optional -->
 
 [Other Documents of Interest](documents.md)
