@@ -1,7 +1,7 @@
 
 
-## Overview of Documents of Interest
 ---------------------------------
+## Overview of Documents of Interest
 
 ### KINDNS
 
@@ -31,7 +31,7 @@ But also:
 
 [DNS](https://www.first.org/global/sigs/dns/)_
 
-[ Abuse Techniquest Matrix](https://www.first.org/global/sigs/dns/DNS-Abuse-Techniques-Matrix_v1.1.pdf)
+[Abuse Techniquest Matrix](https://www.first.org/global/sigs/dns/DNS-Abuse-Techniques-Matrix_v1.1.pdf)
 
 (Unfortunately their DANE authentication fails on the site!)
 

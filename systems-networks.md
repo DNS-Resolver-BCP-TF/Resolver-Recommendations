@@ -21,6 +21,12 @@
   - Custom tweaks/implementations
   - Platforms (it's all Unix these days)
 
+* Network Resiliency
+    - IPv4 AND IPv6
+    - Egress Filtering
+        - [BCP38](https://www.rfc-editor.org/rfc/rfc2827.html)
+
+=======
 ### Software considerations
 
 #### Open Source
