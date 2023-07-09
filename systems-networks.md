@@ -10,21 +10,50 @@
   - Bare metal vs. VM vs. containers, self-hosted vs. hosted vs. cloud
   - Diversity of organizations, legal frameworks
   - (D)DoS measures, such as filtering/rate-limiting traffic, both authoritative and client sides
-  - RPKI, other BGP tricks
   - Common HA designs in DNS resolver space
   - Security best practices (keep stuff updated, follow CERTs, and so on)
-* Anycasting
-  - Why and how (especially problems with listing multiple resolvers in user configurations).
-  - Other options to anycasting?
+
 * Software Considerations
   - Open Source advantages (and disadvantages), licenses
   - Custom tweaks/implementations
   - Platforms (it's all Unix these days)
 
+
+=======
+### Network considerations
+
 * Network Resiliency
+  - RPKI, other BGP tricks
     - IPv4 AND IPv6
     - Egress Filtering
         - [BCP38](https://www.rfc-editor.org/rfc/rfc2827.html)
+
+* Anycasting
+  - Why and how (especially problems with listing multiple resolvers in user configurations).
+  - Other options to anycasting?
+
+
+Care should be taken to allocate the IP Networks used for public resolvers.
+Both IPv4 and IPv6 MUST be deployed.
+Egress Filtering should be done to follow BCP38
+Additionally, sign route advertisements using RPKI
+
+To be robust, using anycast to announce network routes should be used.
+Not deploying some solution to announce networks in multiple locations will incur system performance.
+To add further resiliency, multiple network allocations in different RIRs should be considered.
+
+discuss BGP fallback issues - announcing a /23 via BGP and as a fallback statically pin up a /24 as fallbacks
+
+Should have 2 (or maybe more) IP addresses per address family.
+
+Ideally addresses from different RIRs. The threat is dealing with failures at an RIR, either governance, security, or technical.
+
+
+Publishing a list of back-end addresses used for resolving can be useful for other network & DNS operators (for example, geo-IP location, making sure data is getting to correct places, and so on).
+
+Sign RPKI routes, validating is more optional
+discuss cost / benefit of validating (less spoofed traffic but cost of router cycles)
+
 
 =======
 ### Software considerations
