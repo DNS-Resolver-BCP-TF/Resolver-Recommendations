@@ -11,6 +11,8 @@ Question: Is it important to consider how to measure adherence to these recommen
 
 This document presents best current practices and recommendations for operating DNS resolvers, both public and non-public ones. It covers technical aspects of operations and provides best practice recommendations for data management, with a particular focus on user privacy, security and resilience.
 
+TODO: Specify who document is _not_ for, for example authoritative operators, domain registrars, and so on. Find document which explains roles in DNS ecosystem.
+
 The document serves as guidance for the wider Internet community, offering input to those running public DNS resolver services and those who want to make informed choices between such services. Its purpose is to provide clear guidance and promote effective practices in DNS resolver operation.
 
 ## Random, unsorted list of things to consider
