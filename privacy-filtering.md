@@ -2,9 +2,14 @@
 ## Privacy, Filtering, Transparency
 
 ### Privacy & anonymity
-**Logging considerations**:
 
-**Public privacy policy:** DNS resolvers are recommended to publish their privacy policies transparently on their website. It can be a brief privacy commitment as well or be more elaborate on how the privacy policy was made.
+Operators are advised to apply RFC 8932 "Recommendations for DNS Privacy Service Operators" as follows:
+
+  1. its operational and policy guidance related to DNS encrypted transports and data handling, by applying all "Threat mitigations" (thereby by meeting its level of "minimally compliant") and additionally by applying the "Optimizations" on EDNS Client Subnet listed in section 5.3.1.
+
+  2. its framework on a Recursive operator Privacy Statement, by publishing a privacy statement on their website that is compliant with Section 6.
+
+**Logging considerations**:
 
 **Third party access to personal data:** it seems that the only critical personal data that DNS resolvers collect are IP addresses and the queries that are resolved. The other meta data collected can be used to have an understanding of for example which user accessed which website which can reveal information about a person’s health, lifestyle and other personal preferences (we call this profiling). For example, resolving the website for alcoholics anonymous may tell you something about the health of a person behind an IP address. IP addresses are personally identifiable information. Follow the applicable privacy laws or privacy principles when receiving third party requests to access. Resolvers should only comply with such requests when balancing legitimate third party interest with other fundamental rights. 
 
