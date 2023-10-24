@@ -179,5 +179,3 @@ For: All DNS resolver operators.
 Trust anchor reporting is a way for resolver operators to convey their DNSSEC trust anchor configuration to the operator of the zone that it is for. For most resolvers this is only the root zone. This information is intended to be used during a root KSK rollover to ensure that it is safe to proceed. In the future ICANN is planning an algorithm roll for the root KSK, and this information could be helpful. Resolver operators are encouraged to enable trust anchor reporting.
 
 [RFC8145](https://www.rfc-editor.org/rfc/rfc8145.html) covers trust anchor reporting, in both possibilities available.
-
-  - DNS Health Checking
