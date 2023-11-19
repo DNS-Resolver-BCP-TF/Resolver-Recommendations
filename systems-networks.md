@@ -1,5 +1,6 @@
+## System and Network Hardening
 
-## Systems and Networks Hardening
+
 
 * Capacity
   - CPU/network
@@ -29,6 +30,8 @@
 =======
 ### Infrastructure considerations
 
+Running any Internet service requires attention to the infrastructure used to operate it. This section discusses various approaches that can be used to run a DNS resolver. Everything applies to both public and non-public DNS resolvers.
+
 #### Bare metal or public cloud
 
 All DNS resolver software can run either on dedicated servers (rented or colocated), or in virtualized clouds, or in a combination of those. Every approach has pros and cons. Most of these are not specific to running DNS resolvers, however, some of them are.
@@ -39,9 +42,9 @@ Pros:
 
   - Performance: Bare metal servers have direct access to the underlying hardware, and can offer superior performance/cost balance by avoiding the overhead associated with virtualization. Moreover, you have full control over the server's configurations, down to the hardware level, which can be beneficial for performance and cost optimization once you get the understanding of your typical work load during peak hours.
 
-  - Data Security: Since you're in control of the physical servers, there's no risk of data leakage that can occur due to vulnerabilities in multi-tenant virtualization platforms, including CPU cache-based side-channel vulnerabilities. It could be argued that attacks targeting such issues are rare, and their impact on a DNS resolver service is low, but potential breaches may have significant privacy impact. It is advised to evaluate this against your organisation's risk model, or to discuss this with your information security compliance experts.
+  - Data Security: Since you are in control of the physical servers, there is no risk of data leakage that can occur due to vulnerabilities in multi-tenant virtualization platforms, including CPU cache-based side-channel vulnerabilities. It could be argued that attacks targeting such issues are rare, and their impact on a DNS resolver service is low, but potential breaches may have significant privacy impact. It is advised to evaluate this against your organisation's risk model, or to discuss this with your information security compliance experts.
 
-  - Predictability: Because there's no virtualization layer and no "noisy neighbours" on the host, the performance of your servers is more predictable.
+  - Predictability: Because there is no virtualization layer and no "noisy neighbours" on the host, the performance of your servers is more predictable.
 
 Cons:
 
@@ -49,7 +52,7 @@ Cons:
 
   - Scalability: Scaling up with physical servers means acquiring or renting, installing, and configuring new hardware, which will take more time than provisioning new virtual servers in a cloud environment. Moreover, most cloud environments will provide you with cluster autoscaling features, which could barely be achieved in bare metal.
 
-  - Maintenance: You'll be responsible for all server maintenance tasks, including hardware issues, which can require significant effort and specific expertise.
+  - Maintenance: You will be responsible for all server maintenance tasks, including hardware issues, which can require significant effort and specific expertise.
 
   - Redundancy: Setting up high availability and disaster recovery strategies can be more complex and time consuming compared to the cloud, where these features are often provided as value added products. See the Redundancy section for more details.
 
@@ -57,9 +60,9 @@ Cons:
 
 Pros:
 
-  - Scalability: Clouds excel at scaling applications. You can scale up and down rapidly based on load, which is important for a DNS resolver that needs to handle variable query loads. In case of regional or geographically distributed resolvers, in every region where the resolver would be deployed, daily periodicity is likely to be observed, e.g. peak hour is likely to occur around 19:00 local time, and off-peak hours may begin at around 1:00-3:00 AM. In a situation like that, using cluster autoscaling features and tools, you can run less instances in the night and more instances throughout the day, which may help to optimize your cloud hosting costs.
+  - Scalability: Clouds excel at scaling applications. You can scale up and down rapidly based on load, which is important for a DNS resolver that needs to handle variable query loads. In case of regional or geographically distributed resolvers, in every region where the resolver would be deployed, daily periodicity is likely to be observed, e.g. peak hour is likely to occur around 19:00 local time, and off-peak hours may begin at around 01:00-03:00. In a situation like that, using cluster autoscaling features and tools, you can run less instances in the night and more instances throughout the day, which may help to optimize your cloud hosting costs.
 
-  - Fault Tolerance and High Availability: Most clouds has built-in strategies, features and products for handling node failures, which can increase your service's availability.
+  - Fault Tolerance and High Availability: Most clouds have built-in strategies, features, and products for handling node failures, which can increase your service's availability.
 
   - Deployment and Management: Cloud providers offer built-in methods to deploy and manage applications, which can simplify operations and reduce the likelihood of human errors if your infrastructure management department is already familiar with these tools.
 
