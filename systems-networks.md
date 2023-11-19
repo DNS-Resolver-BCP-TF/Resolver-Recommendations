@@ -1,31 +1,18 @@
 ## System and Network Hardening
 
-
-
 * Capacity
   - CPU/network
   - Multi-layer caching
   - How to estimate
 * Resilience
   - Diversity of software, geography, toplogy.
-  - Bare metal vs. VM vs. containers, self-hosted vs. hosted vs. cloud
   - Diversity of organizations, legal frameworks
   - (D)DoS measures, such as filtering/rate-limiting traffic, both authoritative and client sides
-  - RPKI, other BGP tricks
   - Common HA designs in DNS resolver space
   - Security best practices (keep stuff updated, follow CERTs, and so on)
 * Anycasting
   - Why and how (especially problems with listing multiple resolvers in user configurations).
   - Other options to anycasting?
-* Software Considerations
-  - Open Source advantages (and disadvantages), licenses
-  - Custom tweaks/implementations
-  - Platforms (it's all Unix these days)
-
-* Network Resiliency
-    - IPv4 AND IPv6
-    - Egress Filtering
-        - [BCP38](https://www.rfc-editor.org/rfc/rfc2827.html)
 
 =======
 ### Infrastructure considerations
@@ -76,7 +63,7 @@ Cons:
 
   - Cost Variability: While the cloud can be cheaper, it can also be more expensive if not properly managed. Costs can rise unexpectedly based on traffic. Make sure to always set some limits on how much may be spent on hosting in the cloud control panel, and to set up notifications to be sent to you when these thresholds are about to be triggered.
 
-  - Multi-tenancy Risks: In a public cloud environment, the "noisy neighbor" problem could potentially affect your service's performance. Additionally, even though cloud providers take steps to isolate tenant environments, vulnerabilities could potentially expose sensitive data (see the previous section for a detailed explanation).
+  - Multi-tenancy Risks: In a public cloud environment, the "noisy neighbour" problem could potentially affect your service's performance. Additionally, even though cloud providers take steps to isolate tenant environments, vulnerabilities could potentially expose sensitive data (see the previous section for a detailed explanation).
 
 **Additional considerations**
 
@@ -109,3 +96,38 @@ Drawbacks of open source
 
 Please also consider deploying different software implementations to ensure diversity, as discussed in the diversity section TODO:REF.
 
+### Networking considerations
+
+#### IPv4 and IPv6
+
+**If available, both IPv4 and IPv6 must be deployed.**
+
+Large parts of the authoritative DNS are only accessible via IPv4, so the resolver must be able to originate IPv4 queries. Authoritative DNS that is only accessible via IPv6 is very rare.
+
+Depending on the connectivity of clients, a resolver may be IPv4-only, IPv6-only, or support IPv4 and IPv6.
+
+#### Addressing
+
+**Using multiple IP addresses for the service address should be considered.**
+
+Using 2 or more IPv4 addresses and 2 or more IPv6 addresses from different RIR will allow resilience in failure at an RIR, either governance, security, or technical. Note that support for multiple addresses for recursive resolvers varies and some clients perform poorly if any address does not respond normally.
+
+There is no need to pick an IPv4 address with all octets the same, like 2.2.2.2 or 11.11.11.11.
+
+**Publishing a list of back-end addresses used for resolving should be considered.**
+
+Publishing a list of back-end addresses used for resolving can be useful for other network & DNS operators (for example, geo-IP location, making sure data is getting to correct places, and so on).
+
+#### Ingress Filtering
+
+**Ingress Filtering to follow BCP 38 should be deployed.**
+
+DNS normally uses UDP traffic, which makes it a common vector of both [reflection](https://en.wikipedia.org/wiki/Reflection_attack) and [amplification](https://www.cisa.gov/news-events/alerts/2014/01/17/udp-based-amplification-attacks) attacks. To minimize the amount of spoofed traffic that a resolver responds to, the network should be configured as recommended in [BCP 38](https://www.rfc-editor.org/rfc/rfc2827.html).
+
+#### RPKI Sign Advertised Routes
+
+**Route Advertisements should be signed using RPKI**
+
+Using RPKI to sign any route advertisements - either toward authoritative servers or toward DNS clients - is straightforward to do and will reduce the impact of BGP misconfigurations and some BGP hijacking attempts.
+
+RPKI validation is also possible, although the effort is greater. It is possible that the hosting provider or the transit provider for your service validates BGP; asking and making this part of your selection criteria is reasonable.
