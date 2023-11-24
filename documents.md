@@ -19,10 +19,6 @@ But also:
 
 [Core Platform System Hardening](https://kindns.org/guidelines/core-platform-system-hardening/)
 
-### European DNS Resolver Policy
-
-[Resolver Policy](ttps://europeanresolverpolicy.com/)
-
 ### Recommendations for DNSSEC Resolvers Operators
 
 [draft-ietf-dnsop-dnssec-validator-requirements](https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-dnssec-validator-requirements)
@@ -38,4 +34,12 @@ But also:
 ### Concerns of DNS blocking
 
 [Vint Cerf on DNS Blocking](https://medium.com/@vgcerf/concerns-over-dns-blocking-988ef546a100)
+
+
+### European DNS Resolver Policy
+
+We considered this, but are uncertain about the authorship and so on.
+
+[Resolver Policy](ttps://europeanresolverpolicy.com/)
+
 
