@@ -25,7 +25,7 @@ For: ALL DNS resolver operators.
 UDP is what most clients use, and TCP is necessary for DNS answers that are too
 large for a single UDP packet.
 
-[RFC5996](https://www.rfc-editor.org/rfc/rfc5996.html) explains why TCP is necessary in more detail.
+[RFC7766](https://www.rfc-editor.org/rfc/rfc7766.html) explains why TCP is necessary in more detail.
 
 ### Packet Fragmentation Avoidance
 
@@ -53,6 +53,16 @@ DoT, DoH, and DoQ are different technologies that all provide an encrypted chann
   - [RFC9250](https://www.rfc-editor.org/rfc/rfc9250.html)
 
 QUESTION: How to publish certificates? Need something about Designated Resolvers.
+
+**Discovery of DNS Designated Resolvers**
+
+There are new mechanisms that allow DNS clients to use DNS records to discover
+encrypted DNS configurations.  Resolvers should publish DNS records to assist
+clients finding encrypted resolvers.
+
+- Discovery of Designated Resolvers
+  - [RFC9462](https://www.rfc-editor.org/rfc/rfc9462.html)
+
 
 ### QNAME Minimization
 
@@ -84,13 +94,13 @@ Aggressive NSEC caching is almost always a good idea. However enabling this is l
 
 For: Public resolver operators.
 
-Since the root zone is DNSSEC signed, 
+Since the root zone is DNSSEC signed,
 
 Running a local root has several benefits, but it is an additional component to maintain. For public resolver operators this is definitely worth the cost, but other resolver operators may choose to simply send all queries to the well-distributed root name servers.
 
 [RFC8806](https://www.rfc-editor.org/rfc/rfc8806.html) describes local root, including several example configurations.
 
-In the future it will be possible to use ZONEMD to validate the copy of the root zone obtained before using it. This is currently being deployed for the root zone, but not yet available.  
+In the future it will be possible to use ZONEMD to validate the copy of the root zone obtained before using it. This is currently being deployed for the root zone, but not yet available.
 
 [RFC8976](https://www.rfc-editor.org/rfc/rfc8976.html) describes ZONEMD.
 
