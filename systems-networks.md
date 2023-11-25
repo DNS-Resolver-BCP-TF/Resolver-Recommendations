@@ -64,7 +64,7 @@ Cons:
 
   - The only reason we may find to run a DNS resolver in a Kubernetes cluster on top of self-hosted dedicated servers is when you have significant hands-on experience with Kubernetes and it is natural for you to manage applications this way. Otherwise, running DNS resolver daemons in containers brings little, if any, benefit. Autoscaling features are not available to you in this case, and neither horizontal nor vertical pod autoscaling is of any use, because DNS resolver software typically scales in-host by itself just fine.
 
-  - When designing a cluster of resolvers for autoscaling, keep in mind that newly spawned resolver machines would need to populate resolver cache first before they are fully useful. Your DNS resolver software may provide cache replication mechanisms. Otherwise, it is safe to overprovision clusters somewhat under heavy load, and discarding excessive instances once all the caches are populated and the average load of a compute instance decreases.
+  - When designing a cluster of resolvers for autoscaling, keep in mind that newly spawned resolver machines would need to populate resolver cache first before they are fully useful. Your DNS resolver software may provide cache replication mechanisms. Otherwise, it is safe to overprovision clusters somewhat under heavy load, and discarding excessive instances once all the caches are populated and the average load of a compute instance decreases. In addition, it may be worthwhile to consider sharing cache data between instances.
 
   - It is always advised to prefer environments your infrastructure management team is familiar with.
 
@@ -137,6 +137,14 @@ Using RPKI to sign any route advertisements - either toward authoritative server
 
 RPKI validation is also possible, although the effort is greater. It is possible that the hosting provider or the transit provider for your service validates BGP; asking and making this part of your selection criteria is reasonable.
 
+#### (D)DoS measures
+
+Denial-of-Service (DoS) attacks, both distributed (DDoS) and not are a threat to any Internet service. Network operators for a service providing any DNS service must be prepared for large amounts of attack traffic.
+
+In addition to attacks on the service itself, a resolver may be used both as an attack reflector and as an attack amplifier.
+
+Active monitoring of network and service usage, careful logging, and a security team that is able to respond to problem reports is necessary. Mitigation techniques will include filtering or rate-limiting traffic, both on the authoritative and client side of the resolver.
+
 ### Capacity planning
 
 #### Server capacity
@@ -149,8 +157,22 @@ Hardware performance varies widely, as does operating system and resolver perfor
 
 Since DNS is mostly UDP-based, it is often easy to generate large amounts of spoofed traffic to and from DNS servers. DNS traffic is small compared to application traffic (videos and other content), but still significant. Authoritative server operators often build their networks and servers to handle 10 times their normal load. Recursive server operators may need to do the same, although the service only accepts traffic from IP addresses that cannot be spoofed (for example users within a network that operated by the same company) then this can be reduced, for example to 3 times normal load. To estimate expected load, the best approach is to examine historical usage for the actual expected users of the system.
 
-#### DNS cache design
+### Resilience
 
-A busy resolver will very quickly cache the most busy names, and almost all answers will be read from the DNS cache. However, when a resolver starts, it may have an empty cache, which will mean a period where it has to do a lot more work. In the worst case this results in dropped queries or ones that answer too slowly for users. If the DNS software supports it, then a persistent cache that survives restarts will avoid overload due to an empty cache.
+#### System Diversity
 
-Any DNS resolver service must have multiple servers for redundancy. In the most straightforward approach, each server will run independently, maintaining its own cache which contains entries for client queries that server responds to. It will expire entries independently as well. This may mean inconsistent (although correct) answers to client queries. Sharing cache entries, either partially or completely, will provide a more consistent view, and may also be used to provide a persistent cache.
+In addition to the software considerations above, operators should consider whether to use different server implementations to provide service. This allows continued operation if a critical vulnerability is found in one implementation, by shifting traffic to other implementations.
+
+Placing resolvers and control systems in different physical locations will
+allow continued operation in the event of a disaster or other problem that impacts a single location. In addition, ensuring diverse connectivity to other networks will prevent single points of failure on the network side. Ensuring network diversity may take some care, as it is not always obvious what fate is shared between any given path; this may be physical, virtual, or organizational, and my sometimes be hidden.
+
+#### Security
+
+In addition to the DNS-specific security considerations, normal security best
+practices for any Internet service should be followed, including updating
+software updated regularly, patching software as soon as possible for any
+known security vulnerabilities, following CERT announcements and so on.
+
+#### Certification
+
+It may be useful or required for an organization to follow specific certifications, such as ISO or ITIL. These can be government-defined or industry-defined. For end users there is typically not much direct value, but business customers will often look for services that are operated by organizations meeting such standards.
