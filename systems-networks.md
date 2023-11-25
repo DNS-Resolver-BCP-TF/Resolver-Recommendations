@@ -1,13 +1,5 @@
 ## System and Network Hardening
 
-* Resilience
-  - Diversity of software, geography, toplogy.
-  - Diversity of organizations, legal frameworks
-  - (D)DoS measures, such as filtering/rate-limiting traffic, both authoritative and client sides
-  - Common HA designs in DNS resolver space
-  - Security best practices (keep stuff updated, follow CERTs, and so on)
-
-=======
 ### Infrastructure considerations
 
 Running any Internet service requires attention to the infrastructure used to operate it. This section discusses various approaches that can be used to run a DNS resolver. Everything applies to both public and non-public DNS resolvers.
