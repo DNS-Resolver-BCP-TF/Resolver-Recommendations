@@ -52,8 +52,6 @@ DoT, DoH, and DoQ are different technologies that all provide an encrypted chann
 - DoQ
   - [RFC9250](https://www.rfc-editor.org/rfc/rfc9250.html)
 
-QUESTION: How to publish certificates? Need something about Designated Resolvers.
-
 **Discovery of DNS Designated Resolvers**
 
 There are new mechanisms that allow DNS clients to use DNS records to discover
@@ -63,6 +61,7 @@ clients finding encrypted resolvers.
 - Discovery of Designated Resolvers
   - [RFC9462](https://www.rfc-editor.org/rfc/rfc9462.html)
 
+QUESTION: Do we need to publish certificate in other ways that via the DDR mechanisms?
 
 ### QNAME Minimization
 
