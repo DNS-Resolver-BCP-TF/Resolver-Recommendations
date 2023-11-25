@@ -1,18 +1,11 @@
 ## System and Network Hardening
 
-* Capacity
-  - CPU/network
-  - Multi-layer caching
-  - How to estimate
 * Resilience
   - Diversity of software, geography, toplogy.
   - Diversity of organizations, legal frameworks
   - (D)DoS measures, such as filtering/rate-limiting traffic, both authoritative and client sides
   - Common HA designs in DNS resolver space
   - Security best practices (keep stuff updated, follow CERTs, and so on)
-* Anycasting
-  - Why and how (especially problems with listing multiple resolvers in user configurations).
-  - Other options to anycasting?
 
 =======
 ### Infrastructure considerations
@@ -47,7 +40,7 @@ Cons:
 
 Pros:
 
-  - Scalability: Clouds excel at scaling applications. You can scale up and down rapidly based on load, which is important for a DNS resolver that needs to handle variable query loads. In case of regional or geographically distributed resolvers, in every region where the resolver would be deployed, daily periodicity is likely to be observed, e.g. peak hour is likely to occur around 19:00 local time, and off-peak hours may begin at around 01:00-03:00. In a situation like that, using cluster autoscaling features and tools, you can run less instances in the night and more instances throughout the day, which may help to optimize your cloud hosting costs.
+  - Scalability: Clouds excel at scaling applications. You can scale up and down rapidly based on load, which is important for a DNS resolver that needs to handle variable query loads. In case of regional or geographically distributed resolvers, in every region where the resolver would be deployed, daily periodicity is likely to be observed, for example peak hour is likely to occur around 19:00 local time, and off-peak hours may begin at around 01:00-03:00. In a situation like that, using cluster autoscaling features and tools, you can run less instances in the night and more instances throughout the day, which may help to optimize your cloud hosting costs.
 
   - Fault Tolerance and High Availability: Most clouds have built-in strategies, features, and products for handling node failures, which can increase your service's availability.
 
@@ -118,6 +111,18 @@ There is no need to pick an IPv4 address with all octets the same, like 2.2.2.2 
 
 Publishing a list of back-end addresses used for resolving can be useful for other network & DNS operators (for example, geo-IP location, making sure data is getting to correct places, and so on).
 
+#### Anycasting
+
+**Anycasting may be considered**
+
+Anycasting means routing the same IP prefix to more than one location. As mentioned above for addressing, client support for multiple addresses is not always good; with anycasting you can use a single IP address and have redundancy from different sites. This will often allow you to place sites close to the user - although it is tricky to get optimal routing with BGP.
+
+For a resolver service with a single site there is no benefit. For a resolver service with multiple sites, it may be better to configure clients with different IP addresses rather than use anycasting.
+
+[RFC7094](https://www.rfc-editor.org/rfc/rfc7094.html) discusses anycast in detail, including references to various other RFC which discuss anycasting in general and to DNS in particular.
+
+If a separate prefix is to be used for anycasting, usually this means a /24 in IPv4 and a /48 in IPv6, as those are the smallest sizes that will be widely propagated in BGP. A common practice is to use a covering prefix (/23 in IPv4 or /47 in IPv6) for fallback, and a more-specific prefix (/24 or /48) for the traffic. The more-specific prefix can then be withdrawn to send traffic to a backup site; this will happen automatically if the site is disconnected from routing.
+
 #### Ingress Filtering
 
 **Ingress Filtering to follow BCP 38 should be deployed.**
@@ -131,3 +136,21 @@ DNS normally uses UDP traffic, which makes it a common vector of both [reflectio
 Using RPKI to sign any route advertisements - either toward authoritative servers or toward DNS clients - is straightforward to do and will reduce the impact of BGP misconfigurations and some BGP hijacking attempts.
 
 RPKI validation is also possible, although the effort is greater. It is possible that the hosting provider or the transit provider for your service validates BGP; asking and making this part of your selection criteria is reasonable.
+
+### Capacity planning
+
+#### Server capacity
+
+If using a model that is easy to scale (cloud based, or Kubernetes based, or similar), then getting server capacity correct is largely a question of budgeting. If using a less-flexible model (bare metal for example), then under-estimating will mean problems delivering service.
+
+Hardware performance varies widely, as does operating system and resolver performance. Some lab testing will be necessary to estimate the number of systems needed.
+
+#### Network capacity
+
+Since DNS is mostly UDP-based, it is often easy to generate large amounts of spoofed traffic to and from DNS servers. DNS traffic is small compared to application traffic (videos and other content), but still significant. Authoritative server operators often build their networks and servers to handle 10 times their normal load. Recursive server operators may need to do the same, although the service only accepts traffic from IP addresses that cannot be spoofed (for example users within a network that operated by the same company) then this can be reduced, for example to 3 times normal load. To estimate expected load, the best approach is to examine historical usage for the actual expected users of the system.
+
+#### DNS cache design
+
+A busy resolver will very quickly cache the most busy names, and almost all answers will be read from the DNS cache. However, when a resolver starts, it may have an empty cache, which will mean a period where it has to do a lot more work. In the worst case this results in dropped queries or ones that answer too slowly for users. If the DNS software supports it, then a persistent cache that survives restarts will avoid overload due to an empty cache.
+
+Any DNS resolver service must have multiple servers for redundancy. In the most straightforward approach, each server will run independently, maintaining its own cache which contains entries for client queries that server responds to. It will expire entries independently as well. This may mean inconsistent (although correct) answers to client queries. Sharing cache entries, either partially or completely, will provide a more consistent view, and may also be used to provide a persistent cache.
